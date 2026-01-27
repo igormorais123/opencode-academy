@@ -15,6 +15,7 @@ datasource db {
 model User {
   id                 String    @id @default(cuid())
   email              String    @unique
+  emailVerified      DateTime?
   name               String?
   image              String?
   role               String    @default("BETA_USER") // ADMIN, BETA_USER, FREE, PREMIUM
