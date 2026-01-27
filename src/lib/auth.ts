@@ -31,22 +31,33 @@ export const authOptions: NextAuthOptions = {
       return session
     },
     async signIn({ user, account }) {
-      // Registrar login
+      // Registrar login (apenas se o usuario ja existe no banco)
       if (user.id) {
-        await prisma.loginLog.create({
-          data: {
-            userId: user.id,
-            email: user.email || "",
-            name: user.name,
-          },
-        })
-        
-        // Verificar se e admin
-        if (user.email === process.env.ADMIN_EMAIL) {
-          await prisma.user.update({
+        try {
+          // Verificar se usuario existe antes de criar log
+          const existingUser = await prisma.user.findUnique({
             where: { id: user.id },
-            data: { role: "ADMIN" },
           })
+
+          if (existingUser) {
+            await prisma.loginLog.create({
+              data: {
+                userId: user.id,
+                email: user.email || "",
+                name: user.name,
+              },
+            })
+
+            // Verificar se e admin
+            if (user.email === process.env.ADMIN_EMAIL) {
+              await prisma.user.update({
+                where: { id: user.id },
+                data: { role: "ADMIN" },
+              })
+            }
+          }
+        } catch (error) {
+          console.error("Erro ao registrar login:", error)
         }
       }
       return true
