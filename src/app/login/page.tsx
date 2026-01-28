@@ -4,13 +4,14 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Terminal, Chrome, ArrowLeft, Loader2 } from "lucide-react";
+import { Terminal, Chrome, ArrowLeft, Loader2, Youtube } from "lucide-react";
 import Link from "next/link";
 
 export default function LoginPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingYouTube, setIsLoadingYouTube] = useState(false);
 
   useEffect(() => {
     if (session) {
@@ -30,6 +31,15 @@ export default function LoginPage() {
       await signIn("google", { callbackUrl: "/selecionar-sistema" });
     } catch {
       setIsLoading(false);
+    }
+  };
+
+  const handleYouTubeLogin = async () => {
+    setIsLoadingYouTube(true);
+    try {
+      await signIn("youtube", { callbackUrl: "/selecionar-sistema" });
+    } catch {
+      setIsLoadingYouTube(false);
     }
   };
 
@@ -71,10 +81,10 @@ export default function LoginPage() {
           </div>
 
           {/* Login Card */}
-          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 space-y-4">
             <Button
               onClick={handleGoogleLogin}
-              disabled={isLoading}
+              disabled={isLoading || isLoadingYouTube}
               className="w-full py-6 text-base font-medium bg-white hover:bg-gray-50 text-gray-900 border border-gray-200 rounded-xl"
             >
               {isLoading ? (
@@ -85,8 +95,21 @@ export default function LoginPage() {
               {isLoading ? "Entrando..." : "Continuar com Google"}
             </Button>
 
+            <Button
+              onClick={handleYouTubeLogin}
+              disabled={isLoading || isLoadingYouTube}
+              className="w-full py-6 text-base font-medium bg-[#FF0000] hover:bg-[#CC0000] text-white border-0 rounded-xl"
+            >
+              {isLoadingYouTube ? (
+                <Loader2 className="w-5 h-5 animate-spin mr-3" />
+              ) : (
+                <Youtube className="w-5 h-5 mr-3" />
+              )}
+              {isLoadingYouTube ? "Entrando..." : "Continuar com YouTube"}
+            </Button>
+
             <p className="text-center text-sm text-gray-500 mt-6">
-              Usamos sua conta Google apenas para identificacao.
+              Usamos sua conta Google ou YouTube apenas para identificacao.
               Seus dados estao seguros.
             </p>
           </div>
