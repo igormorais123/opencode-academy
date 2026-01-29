@@ -84,7 +84,7 @@ export function CoachPanel({ onClose, currentModule, currentLesson, userOs }: Co
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-96 h-[500px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200">
+    <div className="fixed inset-x-3 bottom-3 sm:inset-auto sm:bottom-6 sm:right-6 z-50 w-auto sm:w-96 h-[80vh] sm:h-[500px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 bg-blue-500 text-white">
         <div className="flex items-center gap-2">
@@ -142,7 +142,7 @@ export function CoachPanel({ onClose, currentModule, currentLesson, userOs }: Co
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Digite sua mensagem..."
-            className="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-blue-500 text-base"
+            className="flex-1 min-w-0 px-3 sm:px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-blue-500 text-base"
           />
           <button
             onClick={handleSend}

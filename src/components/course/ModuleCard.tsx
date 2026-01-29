@@ -53,30 +53,30 @@ export function ModuleCard({
 
   const content = (
     <div className={cn(
-      "relative p-6 rounded-2xl border-2 transition-all duration-200",
-      isLocked 
+      "relative p-4 sm:p-6 rounded-2xl border-2 transition-all duration-200",
+      isLocked
         ? "border-gray-200 bg-gray-50 opacity-60 cursor-not-allowed"
         : "border-gray-200 bg-white hover:border-blue-300 hover:shadow-lg cursor-pointer",
       className
     )}>
       {/* Badge de status */}
       <div className={cn(
-        "inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium mb-4",
+        "inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4",
         config.badgeClass
       )}>
-        <Icon className="w-4 h-4" />
+        <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         {config.badge}
       </div>
 
       {/* Numero e titulo */}
-      <div className="flex items-start gap-4">
-        <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-500 text-white flex items-center justify-center text-xl font-bold">
+      <div className="flex items-start gap-3 sm:gap-4">
+        <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-500 text-white flex items-center justify-center text-lg sm:text-xl font-bold">
           {id}
         </div>
-        <div className="flex-1">
-          <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
-          <p className="text-gray-500 mt-1">{description}</p>
-          <p className="text-sm text-gray-400 mt-2">{duration}</p>
+        <div className="flex-1 min-w-0">
+          <h3 className="text-lg sm:text-xl font-semibold text-gray-900">{title}</h3>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">{description}</p>
+          <p className="text-xs sm:text-sm text-gray-400 mt-2">{duration}</p>
         </div>
       </div>
 

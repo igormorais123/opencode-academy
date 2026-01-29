@@ -17,15 +17,15 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-[#007AFF] rounded-lg flex items-center justify-center">
               <Terminal className="w-5 h-5 text-white" />
             </div>
-            <span className="font-semibold text-lg">OpenCode Academy</span>
+            <span className="font-semibold text-base sm:text-lg">OpenCode Academy</span>
           </div>
           <Link href="/login">
-            <Button variant="ghost" className="text-[#007AFF] hover:text-[#0056b3]">
+            <Button variant="ghost" className="text-[#007AFF] hover:text-[#0056b3] text-sm sm:text-base">
               Entrar
             </Button>
           </Link>
@@ -33,26 +33,26 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6">
+      <section className="pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-blue-50 text-[#007AFF] px-4 py-2 rounded-full text-sm font-medium mb-8">
+          <div className="inline-flex items-center gap-2 bg-blue-50 text-[#007AFF] px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8">
             <Sparkles className="w-4 h-4" />
             Curso 100% Gratuito - Beta
           </div>
-          
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 leading-tight mb-6">
+
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900 leading-tight mb-4 sm:mb-6">
             Aprenda a programar com{" "}
             <span className="text-[#007AFF]">Inteligencia Artificial</span>
           </h1>
-          
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Sem experiencia previa necessaria. O OpenCode faz a programacao por voce 
+
+          <p className="text-base sm:text-xl text-gray-600 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2">
+            Sem experiencia previa necessaria. O OpenCode faz a programacao por voce
             enquanto voce aprende passo a passo.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 sm:mb-16">
             <Link href="/login">
-              <Button size="lg" className="bg-[#007AFF] hover:bg-[#0056b3] text-white px-8 py-6 text-lg rounded-full">
+              <Button size="lg" className="bg-[#007AFF] hover:bg-[#0056b3] text-white px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg rounded-full w-full sm:w-auto">
                 Comecar Agora
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
@@ -61,35 +61,35 @@ export default function Home() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 max-w-lg mx-auto">
+          <div className="grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mx-auto">
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">8</div>
-              <div className="text-sm text-gray-500">Modulos</div>
+              <div className="text-2xl sm:text-3xl font-bold text-gray-900">8</div>
+              <div className="text-xs sm:text-sm text-gray-500">Modulos</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">30+</div>
-              <div className="text-sm text-gray-500">Licoes</div>
+              <div className="text-2xl sm:text-3xl font-bold text-gray-900">30+</div>
+              <div className="text-xs sm:text-sm text-gray-500">Licoes</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">24/7</div>
-              <div className="text-sm text-gray-500">Coach IA</div>
+              <div className="text-2xl sm:text-3xl font-bold text-gray-900">24/7</div>
+              <div className="text-xs sm:text-sm text-gray-500">Coach IA</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-6 bg-gray-50">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-3 sm:mb-4">
             Por que OpenCode Academy?
           </h2>
-          <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
-            Criado especialmente para quem nunca programou. Cada passo e explicado 
+          <p className="text-center text-gray-600 mb-8 sm:mb-16 max-w-2xl mx-auto text-sm sm:text-base">
+            Criado especialmente para quem nunca programou. Cada passo e explicado
             de forma simples e clara.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
             <FeatureCard
               icon={<GraduationCap className="w-6 h-6" />}
               title="Zero Experiencia Necessaria"
@@ -125,12 +125,12 @@ export default function Home() {
       </section>
 
       {/* Modules Preview */}
-      <section className="py-20 px-6">
+      <section className="py-12 sm:py-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-3 sm:mb-4">
             O que voce vai aprender
           </h2>
-          <p className="text-center text-gray-600 mb-12">
+          <p className="text-center text-gray-600 mb-8 sm:mb-12 text-sm sm:text-base">
             8 modulos que te levam do zero ao seu primeiro projeto
           </p>
 
@@ -145,9 +145,9 @@ export default function Home() {
             <ModulePreview number={7} title="Proximos passos" duration="10 min" />
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-8 sm:mt-12">
             <Link href="/login">
-              <Button size="lg" className="bg-[#007AFF] hover:bg-[#0056b3] text-white px-8 py-6 text-lg rounded-full">
+              <Button size="lg" className="bg-[#007AFF] hover:bg-[#0056b3] text-white px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg rounded-full w-full sm:w-auto">
                 Comecar o Curso Gratis
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
@@ -157,17 +157,17 @@ export default function Home() {
       </section>
 
       {/* Testimonial/CTA Section */}
-      <section className="py-20 px-6 bg-[#007AFF]">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 bg-[#007AFF]">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-6">
             Pronto para comecar?
           </h2>
-          <p className="text-white/90 text-lg mb-8">
+          <p className="text-white/90 text-base sm:text-lg mb-6 sm:mb-8 px-2">
             Junte-se a centenas de pessoas que estao aprendendo a usar IA para programar.
             Nao precisa de cartao de credito.
           </p>
           <Link href="/login">
-            <Button size="lg" className="bg-white text-[#007AFF] hover:bg-gray-100 px-8 py-6 text-lg rounded-full">
+            <Button size="lg" className="bg-white text-[#007AFF] hover:bg-gray-100 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg rounded-full w-full sm:w-auto">
               Criar Conta Gratuita
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
@@ -176,20 +176,20 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-gray-100">
+      <footer className="py-8 sm:py-12 px-4 sm:px-6 border-t border-gray-100">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col items-center gap-3 sm:gap-4 text-center md:flex-row md:justify-between md:text-left">
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 bg-[#007AFF] rounded flex items-center justify-center">
                 <Terminal className="w-4 h-4 text-white" />
               </div>
               <span className="font-medium text-gray-900">OpenCode Academy</span>
             </div>
-            <div className="text-sm text-gray-500">
+            <div className="text-xs sm:text-sm text-gray-500">
               Criado por{" "}
-              <a 
-                href="https://inteia.com.br" 
-                target="_blank" 
+              <a
+                href="https://inteia.com.br"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#007AFF] hover:underline"
               >
@@ -197,7 +197,7 @@ export default function Home() {
               </a>
               {" "}- Instituto de Treinamento e Estudos em IA
             </div>
-            <div className="text-sm text-gray-400">
+            <div className="text-xs sm:text-sm text-gray-400">
               2024 - Todos os direitos reservados
             </div>
           </div>
@@ -217,12 +217,12 @@ function FeatureCard({
   description: string;
 }) {
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-      <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-[#007AFF] mb-4">
+    <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-gray-100">
+      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-50 rounded-xl flex items-center justify-center text-[#007AFF] mb-3 sm:mb-4">
         {icon}
       </div>
-      <h3 className="font-semibold text-lg text-gray-900 mb-2">{title}</h3>
-      <p className="text-gray-600 leading-relaxed">{description}</p>
+      <h3 className="font-semibold text-base sm:text-lg text-gray-900 mb-1 sm:mb-2">{title}</h3>
+      <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{description}</p>
     </div>
   );
 }
@@ -237,14 +237,14 @@ function ModulePreview({
   duration: string;
 }) {
   return (
-    <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-      <div className="w-10 h-10 bg-[#007AFF] text-white rounded-lg flex items-center justify-center font-semibold">
+    <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+      <div className="w-9 h-9 sm:w-10 sm:h-10 bg-[#007AFF] text-white rounded-lg flex items-center justify-center font-semibold text-sm sm:text-base flex-shrink-0">
         {number}
       </div>
-      <div className="flex-1">
-        <div className="font-medium text-gray-900">{title}</div>
+      <div className="flex-1 min-w-0">
+        <div className="font-medium text-gray-900 text-sm sm:text-base truncate">{title}</div>
       </div>
-      <div className="text-sm text-gray-500">{duration}</div>
+      <div className="text-xs sm:text-sm text-gray-500 flex-shrink-0">{duration}</div>
     </div>
   );
 }

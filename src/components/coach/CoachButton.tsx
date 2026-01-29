@@ -20,12 +20,12 @@ export function CoachButton({ currentModule, currentLesson, userOs = 'windows' }
       <button
         onClick={() => setIsOpen(true)}
         className={cn(
-          "fixed bottom-6 right-6 z-40 flex items-center gap-2 px-5 py-3 rounded-full shadow-lg transition-all duration-200",
+          "fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-2 px-4 sm:px-5 py-3 rounded-full shadow-lg transition-all duration-200",
           "bg-blue-500 text-white hover:bg-blue-600 hover:scale-105"
         )}
       >
         <MessageCircle className="w-5 h-5" />
-        <span className="font-medium">Precisa de ajuda?</span>
+        <span className="font-medium hidden sm:inline">Precisa de ajuda?</span>
       </button>
 
       {/* Painel do coach */}

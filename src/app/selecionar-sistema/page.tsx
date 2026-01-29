@@ -83,10 +83,10 @@ export default function SelecionarSistemaPage() {
           </p>
 
           {/* OS Selection */}
-          <div className="grid grid-cols-2 gap-6 mb-10">
+          <div className="grid grid-cols-2 gap-3 sm:gap-6 mb-8 sm:mb-10">
             <OSCard
               os="windows"
-              icon={<Monitor className="w-12 h-12" />}
+              icon={<Monitor className="w-10 h-10 sm:w-12 sm:h-12" />}
               label="Windows"
               description="Windows 10 ou 11"
               selected={selectedOS === "windows"}
@@ -94,7 +94,7 @@ export default function SelecionarSistemaPage() {
             />
             <OSCard
               os="mac"
-              icon={<Apple className="w-12 h-12" />}
+              icon={<Apple className="w-10 h-10 sm:w-12 sm:h-12" />}
               label="Mac"
               description="macOS"
               selected={selectedOS === "mac"}
@@ -150,20 +150,20 @@ function OSCard({
     <button
       onClick={onClick}
       className={`
-        p-8 rounded-2xl border-2 transition-all duration-200
-        ${selected 
-          ? "border-[#007AFF] bg-blue-50 shadow-lg scale-105" 
+        p-5 sm:p-8 rounded-2xl border-2 transition-all duration-200
+        ${selected
+          ? "border-[#007AFF] bg-blue-50 shadow-lg scale-105"
           : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-md"
         }
       `}
     >
-      <div className={`mb-4 ${selected ? "text-[#007AFF]" : "text-gray-400"}`}>
+      <div className={`mb-3 sm:mb-4 ${selected ? "text-[#007AFF]" : "text-gray-400"}`}>
         {icon}
       </div>
-      <div className={`text-xl font-semibold mb-1 ${selected ? "text-[#007AFF]" : "text-gray-900"}`}>
+      <div className={`text-lg sm:text-xl font-semibold mb-1 ${selected ? "text-[#007AFF]" : "text-gray-900"}`}>
         {label}
       </div>
-      <div className="text-sm text-gray-500">{description}</div>
+      <div className="text-xs sm:text-sm text-gray-500">{description}</div>
       
       {selected && (
         <div className="mt-4 inline-flex items-center gap-2 text-sm text-[#007AFF] font-medium">
