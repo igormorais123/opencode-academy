@@ -23,31 +23,31 @@ export function CodeBox({ code, description, language = 'bash', className }: Cod
   return (
     <div className={cn("space-y-2", className)}>
       {description && (
-        <p className="text-zinc-400 text-sm">{description}</p>
+        <p className="text-zinc-400 text-[14px] sm:text-[15px]">{description}</p>
       )}
-      <div className="relative rounded-xl bg-[#1D1D1F] text-[#F5F5F7] p-4 sm:p-6 font-mono text-sm sm:text-base">
+      <div className="relative rounded-[14px] bg-[#1C1C1E] text-[#F5F5F7] p-4 sm:p-5 font-mono">
         <button
-        onClick={handleCopy}
-        className={cn(
-          "absolute top-2 right-2 sm:top-4 sm:right-4 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200",
-          copied
-            ? "bg-green-500/20 text-green-400"
-            : "bg-white/10 text-white/80 hover:bg-white/20"
-        )}
-      >
-        {copied ? (
-          <span className="flex items-center gap-1 sm:gap-2">
-            <Check className="w-3 h-3 sm:w-4 sm:h-4" />
-            <span className="hidden sm:inline">Copiado!</span>
-          </span>
-        ) : (
-          <span className="flex items-center gap-1 sm:gap-2">
-            <Copy className="w-3 h-3 sm:w-4 sm:h-4" />
-            <span className="hidden sm:inline">Copiar</span>
-          </span>
-        )}
-      </button>
-        <pre className="overflow-x-auto pr-10 sm:pr-24 text-xs sm:text-sm">
+          onClick={handleCopy}
+          className={cn(
+            "absolute top-3 right-3 w-9 h-9 sm:w-auto sm:h-auto sm:px-3 sm:py-1.5 rounded-lg flex items-center justify-center gap-1.5 text-[13px] font-medium transition-all duration-200",
+            copied
+              ? "bg-emerald-500/20 text-emerald-400"
+              : "bg-white/10 text-white/70 hover:bg-white/15 active:bg-white/25"
+          )}
+        >
+          {copied ? (
+            <>
+              <Check className="w-4 h-4" />
+              <span className="hidden sm:inline">Copiado</span>
+            </>
+          ) : (
+            <>
+              <Copy className="w-4 h-4" />
+              <span className="hidden sm:inline">Copiar</span>
+            </>
+          )}
+        </button>
+        <pre className="overflow-x-auto pr-12 sm:pr-20 text-[13px] sm:text-[14px] leading-relaxed">
           <code>{code}</code>
         </pre>
       </div>

@@ -52,12 +52,12 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-[#F5F5F7] flex flex-col">
       {/* Header */}
-      <header className="p-6">
-        <Link 
-          href="/" 
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+      <header className="px-5 pt-4 safe-top">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-[#007AFF] hover:text-[#0062CC] text-[15px] font-medium transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Voltar
@@ -65,27 +65,27 @@ export default function LoginPage() {
       </header>
 
       {/* Main */}
-      <main className="flex-1 flex items-center justify-center px-6">
-        <div className="w-full max-w-md">
+      <main className="flex-1 flex items-center justify-center px-5 py-8">
+        <div className="w-full max-w-[400px]">
           {/* Logo */}
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-[#007AFF] rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <div className="w-[64px] h-[64px] bg-[#007AFF] rounded-[18px] flex items-center justify-center mx-auto mb-5 shadow-[0_2px_12px_rgba(0,122,255,0.25)]">
               <Terminal className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            <h1 className="text-[22px] sm:text-[26px] font-bold text-gray-900 tracking-tight mb-2">
               Bem-vindo ao OpenCode Academy
             </h1>
-            <p className="text-gray-600">
+            <p className="text-[15px] text-gray-500">
               Entre com sua conta Google para comecar o curso
             </p>
           </div>
 
           {/* Login Card */}
-          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 space-y-4">
+          <div className="bg-white rounded-[20px] p-6 sm:p-7 shadow-[0_1px_3px_rgba(0,0,0,0.06)] border border-gray-100/50 space-y-3">
             <Button
               onClick={handleGoogleLogin}
               disabled={isLoading || isLoadingYouTube}
-              className="w-full py-6 text-base font-medium bg-white hover:bg-gray-50 text-gray-900 border border-gray-200 rounded-xl"
+              className="w-full h-[52px] text-[15px] font-medium bg-white hover:bg-gray-50 active:bg-gray-100 text-gray-900 border border-gray-200 rounded-[14px] transition-all duration-200"
             >
               {isLoading ? (
                 <Loader2 className="w-5 h-5 animate-spin mr-3" />
@@ -98,7 +98,7 @@ export default function LoginPage() {
             <Button
               onClick={handleYouTubeLogin}
               disabled={isLoading || isLoadingYouTube}
-              className="w-full py-6 text-base font-medium bg-[#FF0000] hover:bg-[#CC0000] text-white border-0 rounded-xl"
+              className="w-full h-[52px] text-[15px] font-medium bg-[#FF0000] hover:bg-[#E60000] active:bg-[#CC0000] text-white border-0 rounded-[14px] transition-all duration-200"
             >
               {isLoadingYouTube ? (
                 <Loader2 className="w-5 h-5 animate-spin mr-3" />
@@ -108,14 +108,14 @@ export default function LoginPage() {
               {isLoadingYouTube ? "Entrando..." : "Continuar com YouTube"}
             </Button>
 
-            <p className="text-center text-sm text-gray-500 mt-6">
-              Usamos sua conta Google ou YouTube apenas para identificacao.
+            <p className="text-center text-[13px] text-gray-400 pt-2">
+              Usamos sua conta apenas para identificacao.
               Seus dados estao seguros.
             </p>
           </div>
 
           {/* Benefits reminder */}
-          <div className="mt-8 space-y-3">
+          <div className="mt-7 space-y-2.5">
             <BenefitItem text="Salve seu progresso automaticamente" />
             <BenefitItem text="Receba certificado ao concluir" />
             <BenefitItem text="Acesse de qualquer dispositivo" />
@@ -124,7 +124,7 @@ export default function LoginPage() {
       </main>
 
       {/* Footer */}
-      <footer className="p-6 text-center text-sm text-gray-400">
+      <footer className="px-5 py-5 text-center text-[12px] text-gray-400 safe-bottom">
         Ao entrar, voce concorda com nossos termos de uso
       </footer>
     </div>
@@ -133,13 +133,13 @@ export default function LoginPage() {
 
 function BenefitItem({ text }: { text: string }) {
   return (
-    <div className="flex items-center gap-3 text-gray-600">
-      <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
-        <svg className="w-3 h-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div className="flex items-center gap-2.5 text-gray-500">
+      <div className="w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
+        <svg className="w-3 h-3 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
         </svg>
       </div>
-      <span className="text-sm">{text}</span>
+      <span className="text-[14px]">{text}</span>
     </div>
   );
 }

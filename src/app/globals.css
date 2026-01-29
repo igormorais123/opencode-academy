@@ -124,13 +124,67 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
   body {
     @apply bg-background text-foreground;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
     overflow-x: hidden;
+    /* iOS safe area support */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
-  html {
-    overflow-x: hidden;
+
+  /* Touch targets - minimum 44px for accessibility */
+  button, a, [role="button"] {
+    min-height: 44px;
+    @apply touch-manipulation;
+  }
+
+  /* Inline links inside text don't need 44px height */
+  p a, span a, li a, td a, .text-link {
+    min-height: auto;
+  }
+
+  /* Smooth momentum scrolling on iOS */
+  .overflow-y-auto, .overflow-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Remove iOS input styling */
+  input, textarea, select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+
+  /* Selection color matching brand */
+  ::selection {
+    background-color: rgba(0, 122, 255, 0.2);
+    color: inherit;
+  }
+}
+
+/* Utilities for mobile app feel */
+@layer utilities {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
   }
 }

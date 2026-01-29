@@ -21,8 +21,8 @@ export function CoachPanel({ onClose, currentModule, currentLesson, userOs }: Co
     {
       role: 'assistant',
       content: `Ola! Sou o Guia, seu assistente neste curso. ${
-        currentModule !== undefined 
-          ? `Vi que voce esta no Modulo ${currentModule}. ` 
+        currentModule !== undefined
+          ? `Vi que voce esta no Modulo ${currentModule}. `
           : ''
       }Posso ajudar com algo?`
     }
@@ -30,6 +30,7 @@ export function CoachPanel({ onClose, currentModule, currentLesson, userOs }: Co
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -56,20 +57,20 @@ export function CoachPanel({ onClose, currentModule, currentLesson, userOs }: Co
           currentModule,
           currentLesson,
           userOs,
-          history: messages.slice(-6) // Ultimas 6 mensagens para contexto
+          history: messages.slice(-6)
         })
       })
 
       const data = await response.json()
-      
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: data.response || 'Desculpe, tive um problema. Tente novamente.' 
+
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: data.response || 'Desculpe, tive um problema. Tente novamente.'
       }])
     } catch (error) {
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: 'Desculpe, nao consegui responder agora. Tente novamente em alguns segundos.' 
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: 'Desculpe, nao consegui responder agora. Tente novamente em alguns segundos.'
       }])
     } finally {
       setIsLoading(false)
@@ -84,80 +85,101 @@ export function CoachPanel({ onClose, currentModule, currentLesson, userOs }: Co
   }
 
   return (
-    <div className="fixed inset-x-3 bottom-3 sm:inset-auto sm:bottom-6 sm:right-6 z-50 w-auto sm:w-96 h-[80vh] sm:h-[500px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200">
-      {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 bg-blue-500 text-white">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-            🤖
-          </div>
-          <span className="font-semibold">Guia</span>
+    <>
+      {/* Backdrop for mobile */}
+      <div
+        className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm sm:hidden"
+        onClick={onClose}
+      />
+
+      <div className="fixed inset-x-0 bottom-0 sm:inset-auto sm:bottom-6 sm:right-6 z-50 w-full sm:w-[380px] h-[85vh] sm:h-[520px] bg-white sm:rounded-2xl rounded-t-[20px] shadow-2xl flex flex-col overflow-hidden sm:border sm:border-gray-200/60">
+        {/* Handle bar for mobile */}
+        <div className="flex justify-center pt-2 pb-0 sm:hidden">
+          <div className="w-9 h-1 rounded-full bg-gray-300" />
         </div>
-        <button
-          onClick={onClose}
-          className="p-1 hover:bg-white/20 rounded-lg transition-colors"
-        >
-          <X className="w-5 h-5" />
-        </button>
-      </div>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.map((msg, i) => (
-          <div
-            key={i}
-            className={cn(
-              "flex",
-              msg.role === 'user' ? "justify-end" : "justify-start"
-            )}
-          >
-            <div
-              className={cn(
-                "max-w-[80%] px-4 py-3 rounded-2xl text-base",
-                msg.role === 'user'
-                  ? "bg-blue-500 text-white rounded-br-md"
-                  : "bg-gray-100 text-gray-800 rounded-bl-md"
-              )}
-            >
-              <div className="whitespace-pre-wrap">{msg.content}</div>
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-100">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-full bg-[#007AFF]/10 flex items-center justify-center text-[16px]">
+              🤖
+            </div>
+            <div>
+              <span className="font-semibold text-[16px] text-gray-900">Guia</span>
+              <p className="text-[11px] text-gray-400">Assistente do curso</p>
             </div>
           </div>
-        ))}
-        {isLoading && (
-          <div className="flex justify-start">
-            <div className="bg-gray-100 px-4 py-3 rounded-2xl rounded-bl-md">
-              <Loader2 className="w-5 h-5 animate-spin text-gray-500" />
-            </div>
-          </div>
-        )}
-        <div ref={messagesEndRef} />
-      </div>
-
-      {/* Input */}
-      <div className="p-4 border-t border-gray-200">
-        <div className="flex gap-2">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Digite sua mensagem..."
-            className="flex-1 min-w-0 px-3 sm:px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-blue-500 text-base"
-          />
           <button
-            onClick={handleSend}
-            disabled={!input.trim() || isLoading}
-            className={cn(
-              "p-3 rounded-xl transition-colors",
-              input.trim() && !isLoading
-                ? "bg-blue-500 text-white hover:bg-blue-600"
-                : "bg-gray-100 text-gray-400 cursor-not-allowed"
-            )}
+            onClick={onClose}
+            className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 active:bg-gray-200 rounded-full transition-colors"
           >
-            <Send className="w-5 h-5" />
+            <X className="w-[18px] h-[18px] text-gray-400" />
           </button>
         </div>
+
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+          {messages.map((msg, i) => (
+            <div
+              key={i}
+              className={cn(
+                "flex",
+                msg.role === 'user' ? "justify-end" : "justify-start"
+              )}
+            >
+              <div
+                className={cn(
+                  "max-w-[82%] px-4 py-2.5 text-[15px] leading-relaxed",
+                  msg.role === 'user'
+                    ? "bg-[#007AFF] text-white rounded-[18px] rounded-br-[6px]"
+                    : "bg-[#F5F5F7] text-gray-800 rounded-[18px] rounded-bl-[6px]"
+                )}
+              >
+                <div className="whitespace-pre-wrap">{msg.content}</div>
+              </div>
+            </div>
+          ))}
+          {isLoading && (
+            <div className="flex justify-start">
+              <div className="bg-[#F5F5F7] px-4 py-3 rounded-[18px] rounded-bl-[6px]">
+                <div className="flex gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+                </div>
+              </div>
+            </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+
+        {/* Input */}
+        <div className="px-4 py-3 border-t border-gray-100 safe-bottom">
+          <div className="flex gap-2 items-end">
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Digite sua mensagem..."
+              className="flex-1 min-w-0 px-4 py-3 rounded-full bg-[#F5F5F7] border-0 focus:outline-none focus:ring-2 focus:ring-[#007AFF]/30 text-[16px] text-gray-900 placeholder:text-gray-400"
+            />
+            <button
+              onClick={handleSend}
+              disabled={!input.trim() || isLoading}
+              className={cn(
+                "w-11 h-11 flex-shrink-0 rounded-full flex items-center justify-center transition-all duration-200",
+                input.trim() && !isLoading
+                  ? "bg-[#007AFF] text-white active:bg-[#004EA6] active:scale-95 shadow-sm"
+                  : "bg-gray-100 text-gray-300"
+              )}
+            >
+              <Send className="w-[18px] h-[18px]" />
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }

@@ -267,49 +267,49 @@ export default function LessonPage() {
       {/* Sidebar Mobile Toggle */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="lg:hidden fixed top-3 left-3 z-50 p-2 bg-zinc-800 rounded-lg"
+        className="lg:hidden fixed top-3 left-3 z-50 w-10 h-10 flex items-center justify-center bg-zinc-800/90 backdrop-blur-sm rounded-[10px] active:bg-zinc-700 transition-colors"
       >
         {sidebarOpen ? (
-          <X className="w-5 h-5 text-white" />
+          <X className="w-[18px] h-[18px] text-white" />
         ) : (
-          <Menu className="w-5 h-5 text-white" />
+          <Menu className="w-[18px] h-[18px] text-white" />
         )}
       </button>
 
       {/* Sidebar overlay */}
       {sidebarOpen && (
         <div
-          className="lg:hidden fixed inset-0 z-30 bg-black/50"
+          className="lg:hidden fixed inset-0 z-30 bg-black/50 backdrop-blur-sm"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-40 w-[280px] sm:w-80 bg-zinc-900 border-r border-zinc-800 transform transition-transform lg:transform-none ${
+        className={`fixed lg:static inset-y-0 left-0 z-40 w-[280px] sm:w-80 bg-zinc-900 border-r border-zinc-800/60 transform transition-transform duration-300 ease-out lg:transform-none ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
-        <div className="p-4 border-b border-zinc-800">
+        <div className="p-4 border-b border-zinc-800/60 safe-top">
           <Link
             href={`/aprender/${slug}`}
-            className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors"
+            className="flex items-center gap-1.5 text-[#007AFF] text-[15px] font-medium hover:text-[#0062CC] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Voltar ao curso
           </Link>
         </div>
 
-        <div className="p-4 overflow-y-auto h-[calc(100vh-60px)]">
+        <div className="p-3 overflow-y-auto h-[calc(100vh-60px)]">
           {modules.map((mod) => (
-            <div key={mod.id} className="mb-6">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-lg">{mod.badgeIcon}</span>
-                <span className="font-medium text-white text-sm">
+            <div key={mod.id} className="mb-5">
+              <div className="flex items-center gap-2 mb-1.5 px-2">
+                <span className="text-[15px]">{mod.badgeIcon}</span>
+                <span className="font-semibold text-white text-[13px] uppercase tracking-wide opacity-70">
                   {mod.title}
                 </span>
               </div>
-              <div className="space-y-1 pl-6">
+              <div className="space-y-0.5 pl-2">
                 {mod.lessons.map((les) => {
                   const isComplete = progress?.completedLessons?.includes(les.id)
                   const isCurrent = les.id === lessonId
@@ -319,18 +319,20 @@ export default function LessonPage() {
                       key={les.id}
                       href={`/aprender/${slug}/${mod.id}/${les.id}`}
                       onClick={() => setSidebarOpen(false)}
-                      className={`flex items-center gap-2 py-1.5 px-2 rounded text-sm transition-colors ${
+                      className={`flex items-center gap-2.5 py-2 px-2.5 rounded-[10px] text-[14px] transition-colors ${
                         isCurrent
-                          ? 'bg-emerald-500/20 text-emerald-400'
+                          ? 'bg-[#007AFF]/15 text-[#007AFF]'
                           : isComplete
                           ? 'text-zinc-500'
-                          : 'text-zinc-400 hover:text-white'
+                          : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50 active:bg-zinc-800'
                       }`}
                     >
                       {isComplete ? (
-                        <CheckCircle className="w-4 h-4 text-emerald-500" />
+                        <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                      ) : isCurrent ? (
+                        <div className="w-4 h-4 rounded-full border-2 border-[#007AFF] flex-shrink-0" />
                       ) : (
-                        <div className="w-4 h-4 rounded-full border border-zinc-600" />
+                        <div className="w-4 h-4 rounded-full border border-zinc-600 flex-shrink-0" />
                       )}
                       <span className="truncate">{les.title}</span>
                     </Link>
@@ -345,27 +347,27 @@ export default function LessonPage() {
       {/* Main Content */}
       <main className="flex-1 min-h-screen">
         {/* Header */}
-        <header className="sticky top-0 z-30 bg-zinc-900/80 backdrop-blur border-b border-zinc-800 p-3 sm:p-4">
+        <header className="sticky top-0 z-30 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-800/50 px-4 py-3 safe-top">
           <div className="max-w-3xl mx-auto pl-10 lg:pl-0">
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mb-2.5">
               <div className="min-w-0 flex-1">
-                <p className="text-xs text-zinc-500 truncate">
+                <p className="text-[11px] text-zinc-500 truncate uppercase tracking-wider font-medium">
                   Módulo {currentModule.order}: {currentModule.title}
                 </p>
-                <h1 className="text-base sm:text-lg font-semibold text-white truncate">
+                <h1 className="text-[16px] sm:text-[18px] font-semibold text-white truncate tracking-tight mt-0.5">
                   {currentLesson.title}
                 </h1>
               </div>
-              <div className="flex items-center gap-2 flex-shrink-0 ml-2">
+              <div className="flex items-center gap-2 flex-shrink-0 ml-3">
                 <button
                   onClick={() => setUserOs(userOs === 'windows' ? 'mac' : 'windows')}
-                  className="text-xs px-2 py-1 rounded bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
+                  className="text-[12px] px-2.5 py-1.5 rounded-lg bg-zinc-800/80 text-zinc-400 hover:text-white active:bg-zinc-700 transition-colors"
                 >
                   {userOs === 'windows' ? '🪟 Win' : '🍎 Mac'}
                 </button>
               </div>
             </div>
-            <Progress value={lessonProgress} className="h-1" />
+            <Progress value={lessonProgress} className="h-[3px]" />
           </div>
         </header>
 
@@ -441,13 +443,13 @@ export default function LessonPage() {
           </div>
 
           {/* Navigation */}
-          <div className="mt-8 sm:mt-12 flex items-center justify-between gap-3">
+          <div className="mt-10 sm:mt-14 flex items-center justify-between gap-3 safe-bottom pb-4">
             {prevLesson ? (
               <Link
                 href={`/aprender/${slug}/${prevLesson.moduleId}/${prevLesson.lessonId}`}
               >
-                <Button variant="outline" className="text-sm sm:text-base">
-                  <ArrowLeft className="w-4 h-4 mr-1 sm:mr-2" />
+                <Button variant="outline" className="h-11 sm:h-12 text-[14px] sm:text-[15px] rounded-[12px] border-zinc-700 text-zinc-300 hover:text-white hover:border-zinc-600 active:bg-zinc-800 transition-all">
+                  <ArrowLeft className="w-4 h-4 mr-1.5" />
                   <span className="hidden sm:inline">Anterior</span>
                   <span className="sm:hidden">Ant.</span>
                 </Button>
@@ -458,19 +460,19 @@ export default function LessonPage() {
 
             <Button
               onClick={handleLessonComplete}
-              className="bg-emerald-600 hover:bg-emerald-700 text-sm sm:text-base"
+              className="h-11 sm:h-12 text-[14px] sm:text-[15px] font-semibold rounded-[12px] bg-[#007AFF] hover:bg-[#0062CC] active:bg-[#004EA6] active:scale-[0.98] shadow-[0_2px_8px_rgba(0,122,255,0.3)] transition-all duration-200"
             >
               {nextLesson ? (
                 <>
                   <span className="hidden sm:inline">Próxima Lição</span>
                   <span className="sm:hidden">Próxima</span>
-                  <ArrowRight className="w-4 h-4 ml-1 sm:ml-2" />
+                  <ArrowRight className="w-4 h-4 ml-1.5" />
                 </>
               ) : (
                 <>
                   <span className="hidden sm:inline">Concluir Curso</span>
                   <span className="sm:hidden">Concluir</span>
-                  <CheckCircle className="w-4 h-4 ml-1 sm:ml-2" />
+                  <CheckCircle className="w-4 h-4 ml-1.5" />
                 </>
               )}
             </Button>
