@@ -96,12 +96,18 @@ async function seedCourse(
   return { course, stats }
 }
 
-export async function POST() {
+export async function POST(request: Request) {
   try {
-    // Verificar se é admin
-    const session = await getServerSession(authOptions)
-    if (!session?.user || session.user.role !== 'ADMIN') {
-      return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+    // Verificar se é admin (sessão ou seed secret)
+    const authHeader = request.headers.get('authorization')
+    const seedSecret = process.env.SEED_SECRET
+    const isSecretAuth = seedSecret && authHeader === `Bearer ${seedSecret}`
+
+    if (!isSecretAuth) {
+      const session = await getServerSession(authOptions)
+      if (!session?.user || session.user.role !== 'ADMIN') {
+        return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+      }
     }
 
     console.log('🚀 Iniciando migração de conteúdo...\n')
