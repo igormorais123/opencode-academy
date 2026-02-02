@@ -9,9 +9,10 @@ interface CoachButtonProps {
   currentModule?: number
   currentLesson?: string
   userOs?: 'windows' | 'mac'
+  courseSlug?: string
 }
 
-export function CoachButton({ currentModule, currentLesson, userOs = 'windows' }: CoachButtonProps) {
+export function CoachButton({ currentModule, currentLesson, userOs = 'windows', courseSlug }: CoachButtonProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -42,6 +43,7 @@ export function CoachButton({ currentModule, currentLesson, userOs = 'windows' }
           currentModule={currentModule}
           currentLesson={currentLesson}
           userOs={userOs}
+          courseSlug={courseSlug}
         />
       )}
     </>

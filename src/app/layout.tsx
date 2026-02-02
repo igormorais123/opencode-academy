@@ -22,22 +22,22 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "OpenCode Academy | Aprenda a programar com IA",
-  description: "Curso interativo para iniciantes aprenderem a usar o OpenCode, a ferramenta de programação assistida por IA. Sem experiencia necessaria.",
-  keywords: ["OpenCode", "programacao", "IA", "inteligencia artificial", "curso", "iniciantes"],
+  title: "INTEIA Academy | Aprenda tecnologia com IA",
+  description: "Cursos praticos de IA para iniciantes. OpenCode, Claude Code e mais. Sem experiencia necessaria.",
+  keywords: ["INTEIA", "OpenCode", "Claude Code", "programacao", "IA", "inteligencia artificial", "curso", "iniciantes"],
   authors: [{ name: "INTEIA - Instituto de Treinamento e Estudos em IA" }],
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "OpenCode Academy",
+    title: "INTEIA Academy",
   },
   formatDetection: {
     telephone: false,
   },
   openGraph: {
-    title: "OpenCode Academy | Aprenda a programar com IA",
-    description: "Curso interativo para iniciantes aprenderem a usar o OpenCode",
+    title: "INTEIA Academy | Aprenda tecnologia com IA",
+    description: "Cursos praticos de IA para iniciantes. OpenCode, Claude Code e mais.",
     type: "website",
     locale: "pt_BR",
   },

@@ -1,12 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import { errorsDatabase } from '@/content/errors-database'
+import { claudeCodeErrorsDatabase } from '@/content/claude-code-errors'
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY || '')
 
-const SYSTEM_PROMPT = `Voce e o Guia, assistente virtual da OpenCode Academy.
-Seu trabalho e ajudar pessoas nao-tecnicas (juristas, servidores publicos, pessoas 65+) 
-a completar o curso de instalacao e uso do OpenCode.
+function getSystemPrompt(courseSlug?: string) {
+  const isClaudeCode = courseSlug === 'claude-code'
+  const courseName = isClaudeCode ? 'Claude Code' : 'OpenCode'
+  const errors = isClaudeCode ? claudeCodeErrorsDatabase : errorsDatabase
+
+  return `Voce e o Guia, assistente virtual da INTEIA Academy.
+Seu trabalho e ajudar pessoas nao-tecnicas (juristas, servidores publicos, pessoas 65+)
+a completar o curso de ${courseName}.
 
 REGRAS FUNDAMENTAIS:
 
@@ -35,17 +41,18 @@ REGRAS FUNDAMENTAIS:
    - Forneca um prompt formatado para ajudar
 
 BASE DE ERROS CONHECIDOS:
-${JSON.stringify(errorsDatabase, null, 2)}
+${JSON.stringify(errors, null, 2)}
 `
+}
 
 export async function POST(req: NextRequest) {
   try {
-    const { message, currentModule, currentLesson, userOs, history } = await req.json()
+    const { message, currentModule, currentLesson, userOs, history, courseSlug } = await req.json()
 
     // Se a API key nao estiver configurada, retorna resposta padrao
     if (!process.env.GOOGLE_AI_API_KEY) {
       return NextResponse.json({
-        response: `Desculpe, o assistente ainda nao esta configurado. 
+        response: `Desculpe, o assistente ainda nao esta configurado.
 
 Se voce esta com um erro, tente:
 1. Copie a mensagem de erro
@@ -62,16 +69,17 @@ Volte aqui depois para continuar o curso!`
     const contextInfo = `
 CONTEXTO DO USUARIO:
 - Sistema Operacional: ${userOs || 'windows'}
+- Curso: ${courseSlug || 'opencode-academy'}
 - Modulo atual: ${currentModule !== undefined ? currentModule : 'nao identificado'}
 - Licao atual: ${currentLesson || 'nao identificada'}
 `
 
     // Montar historico
-    const historyText = history?.map((m: any) => 
+    const historyText = history?.map((m: any) =>
       `${m.role === 'user' ? 'Usuario' : 'Guia'}: ${m.content}`
     ).join('\n') || ''
 
-    const prompt = `${SYSTEM_PROMPT}
+    const prompt = `${getSystemPrompt(courseSlug)}
 
 ${contextInfo}
 
@@ -89,7 +97,7 @@ Guia:`
   } catch (error) {
     console.error('Erro no coach:', error)
     return NextResponse.json({
-      response: `Desculpe, tive um problema tecnico. 
+      response: `Desculpe, tive um problema tecnico.
 
 Tente novamente em alguns segundos. Se o problema persistir, voce pode:
 1. Ir em chat.openai.com

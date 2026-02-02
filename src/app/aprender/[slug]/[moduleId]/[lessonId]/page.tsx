@@ -485,6 +485,7 @@ export default function LessonPage() {
         currentModule={currentModule.order}
         currentLesson={currentLesson.title}
         userOs={userOs}
+        courseSlug={slug}
       />
     </div>
   )

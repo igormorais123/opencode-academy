@@ -14,9 +14,10 @@ interface CoachPanelProps {
   currentModule?: number
   currentLesson?: string
   userOs?: 'windows' | 'mac'
+  courseSlug?: string
 }
 
-export function CoachPanel({ onClose, currentModule, currentLesson, userOs }: CoachPanelProps) {
+export function CoachPanel({ onClose, currentModule, currentLesson, userOs, courseSlug }: CoachPanelProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
@@ -57,6 +58,7 @@ export function CoachPanel({ onClose, currentModule, currentLesson, userOs }: Co
           currentModule,
           currentLesson,
           userOs,
+          courseSlug,
           history: messages.slice(-6)
         })
       })
